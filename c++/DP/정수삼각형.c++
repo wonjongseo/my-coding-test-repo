@@ -14,7 +14,7 @@ int main(){
     }
 
     for (int i = 1; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j <=i; j++) {
             int up_left, up;
 
             if (j == 0) {

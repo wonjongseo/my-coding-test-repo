@@ -30,12 +30,7 @@ int main(){
                 count0++;
         }
     }
-
     cout << min(count1, count0);
-
-
-
-
 }
 
 
