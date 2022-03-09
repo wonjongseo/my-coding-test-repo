@@ -5,6 +5,7 @@ using namespace std;
 bool visit[51][51];
 int rooms[51][51];
 int n ,m  , x, y, direction;
+//          상 , 우 , 하 , 좌
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0 , 1, 0 ,-1};
 
