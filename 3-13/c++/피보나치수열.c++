@@ -8,10 +8,8 @@ void solution(int n) {
     for (int i = 3; i <= n; i++) {
         d[i] = d[i - 1] + d[i - 2];
     }
-
     printf("%d\n", d[n]);
 }
-
 
 int main(){
     int n;
