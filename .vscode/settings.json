@@ -3,6 +3,7 @@
         "iostream": "cpp",
         "utility": "cpp",
         "memory": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "queue": "cpp"
     }
 }
