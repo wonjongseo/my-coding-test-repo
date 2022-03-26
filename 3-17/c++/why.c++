@@ -1,33 +1,33 @@
 #include <queue>
 #include<algorithm>
 #include <iostream>
-
-#define  X first
-#define  Y second
+#define INF 1e9
 using namespace std;
 
 vector<pair<int, int>> graph[20001];
-const int INF = 0x3f3f3f3f;
 int d[20001];
 int V, E , start;
 
-void dijkstra(){
-    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>> > pq;
+void dijkstra(int start){
+    priority_queue<pair<int,int>> pq;
     d[start] = 0;
-    // 우선순위 큐에 (0, 시작점) 추가
-    pq.push({d[start],start});
-    while(!pq.empty()){
-        auto cur = pq.top(); pq.pop(); // {비용, 정점 번호}
-        // 거리가 d에 있는 값과 다를 경우 넘어감
-        if(d[cur.Y] != cur.X) continue;
-        for(auto nxt : graph[cur.Y]){
-            if(d[nxt.Y] <= d[cur.Y]+nxt.X) continue;
-            // cur를 거쳐가는 것이 더 작은 값을 가질 경우
-            // d[nxt.Y]을 갱신하고 우선순위 큐에 (거리, nxt.Y)를 추가
-            d[nxt.Y] = d[cur.Y]+nxt.X;
-            pq.push({d[nxt.Y],nxt.Y});
+    pq.push({0, start});
+
+    while (!pq.empty()) {
+        int dist = -pq.top().first;
+        int now = pq.top().second;
+        pq.pop();
+        if(d[now] < dist) continue;
+
+        for(int i = 0; i < graph[now].size(); i++) {
+            int cost = graph[now][i].second + dist;
+            if (cost < d[graph[now][i].first]) {
+                d[graph[now][i].first] = cost;
+                pq.push({-cost, graph[now][i].first});
+            }
         }
     }
+
     for (int i = 1; i <= V; i++) {
         if (d[i] == INF) {
             cout << "INF" << endl;
@@ -38,19 +38,27 @@ void dijkstra(){
 }
 
 int main(){
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+    ios::sync_with_stdio(NULL);
+    cin.tie(NULL);
+
+    cout.tie(NULL);
 
     cin >> V >> E;
     fill(d, d + V + 1, INF);
     cin >> start;
 
+
     for (int i = 0; i < E; i++) {
         int a, b, c;
         cin >> a >> b >> c;
-        graph[a].push_back({c, b});
+        graph[a].push_back({b, c});
     }
 
-    dijkstra();
+    dijkstra(start);
+
+
+
+
+
 
 }
